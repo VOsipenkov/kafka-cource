@@ -3,7 +3,6 @@ package ru.lanit.bpm.kafkacourse.app;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.EnableKafka;
-import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import ru.lanit.bpm.kafkacourse.domain.Order;
@@ -14,16 +13,16 @@ import ru.lanit.bpm.kafkacourse.domain.Order;
 @RequiredArgsConstructor
 public class OrderService {
 
-    private final KafkaTemplate<String, Order> kafkaTemplate;
-    private final String topic;
+    private final KafkaTemplate<String, Object> orderKafkaTemplate;
+    private final String orderTopic;
 
     public void send(Order order) {
         log.info("Отправка сообщения в кафку {}", order);
-        kafkaTemplate.send(topic, "", order);
+        orderKafkaTemplate.send(orderTopic, "", order);
     }
 
-    @KafkaListener(topics = "#{topic}")
-    public void listener(Order order) {
-        log.info("Получено сообщение из кафки {}", order);
-    }
+//    @KafkaListener(topics = "#{topic}")
+//    public void listener(Order order) {
+//        log.info("Получено сообщение из кафки {}", order);
+//    }
 }

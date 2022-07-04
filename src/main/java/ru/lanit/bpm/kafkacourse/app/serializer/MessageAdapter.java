@@ -18,8 +18,8 @@ public class MessageAdapter<T> implements Serializer<T>, Deserializer<T> {
     private ObjectMapper objectMapper;
     private Class<T> clazz;
 
-    private static final String VALUE_TYPE = "value-class";
-    private static final String KEY_TYPE = "key-class";
+    private static final String VALUE_TYPE = "value.class";
+    private static final String KEY_TYPE = "key.class";
     private static final String SERIALIZATION_MESSAGE_ERROR = "Serialization class not found";
 
     @Override

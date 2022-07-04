@@ -6,11 +6,19 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class KafkaProps {
-    @Value("${spring.kafka.template.default-topic}")
-    private String topicValue;
+    @Value("${spring.kafka.producer.order.topic}")
+    private String orderTopicValue;
+
+    @Value("${spring.kafka.producer.user.topic}")
+    private String userTopicValue;
 
     @Bean
-    public String topic() {
-        return topicValue;
+    public String orderTopic() {
+        return orderTopicValue;
+    }
+
+    @Bean
+    public String userTopic() {
+        return userTopicValue;
     }
 }
