@@ -20,9 +20,4 @@ public class OrderService {
         log.info("Отправка сообщения в кафку {}", order);
         orderKafkaTemplate.send(orderTopic, "", order);
     }
-
-//    @KafkaListener(topics = "#{topic}")
-//    public void listener(Order order) {
-//        log.info("Получено сообщение из кафки {}", order);
-//    }
 }

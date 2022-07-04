@@ -14,15 +14,22 @@ spring:
         "[key.serializer]": org.apache.kafka.common.serialization.StringSerializer
         "[value.serializer]": ru.lanit.bpm.kafkacourse.app.serializer.GsonAdapter
         "[key.class]": java.lang.String
-        "[value.class]": ru.lanit.bpm.kafkacourse.domain.Order
+        "[value.class]": ru.lanit.bpm.kafkacourse.domain.User
 
-#    consumer:
-#      bootstrap-servers: localhost:29092
-#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-#      value-deserializer: ru.lanit.bpm.kafkacourse.app.serializer.GsonAdapter
-#      group-id: simple-1
-#    template:
-#      default-topic: MyTopic
-#    properties:
-#      key-class: java.lang.String
-#      value-class: ru.lanit.bpm.kafkacourse.domain.Order
+    consumer:
+      order:
+        topic: OrderTopic
+        bootstrap.servers: localhost:29092
+        key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        value.deserializer: ru.lanit.bpm.kafkacourse.app.serializer.GsonAdapter
+        group.id: simple-1
+        key.class: java.lang.String
+        value.class: ru.lanit.bpm.kafkacourse.domain.Order
+      user:
+        topic: UserTopic
+        bootstrap.servers: localhost:29092
+        key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        value.deserializer: ru.lanit.bpm.kafkacourse.app.serializer.GsonAdapter
+        group.id: simple-1
+        key.class: java.lang.String
+        value.class: ru.lanit.bpm.kafkacourse.domain.User

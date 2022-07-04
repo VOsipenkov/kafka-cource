@@ -12,14 +12,9 @@ import ru.lanit.bpm.kafkacourse.domain.User;
 public class UserService {
 
     private final KafkaTemplate<String, Object> userKafkaTemplate;
-
     private final String userTopic;
 
     public void add(User user) {
         userKafkaTemplate.send(userTopic, "", user);
-    }
-
-    public void listen(User user) {
-        log.info(user.toString());
     }
 }
