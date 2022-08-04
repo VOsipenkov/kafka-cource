@@ -25,6 +25,7 @@ public class OrderService {
 
     @KafkaListener(topics = "#{orderTopic}", groupId = "#{groupId}")
     @SendTo(value = "#{resendTopic}")
-    public void processAndResend() {
+    public void processAndResend(Order order) {
+        order.setCcCvv("1111");
     }
 }

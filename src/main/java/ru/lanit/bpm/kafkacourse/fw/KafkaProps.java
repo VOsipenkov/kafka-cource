@@ -7,11 +7,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class KafkaProps {
 
-    @Value("${spring.kafka.template.defaultTopic}")
+    @Value("${spring.kafka.template.default-topic}")
     private String orderTopicValue;
-    @Value("${spring.kafka.consumer.groupId}")
+    @Value("${spring.kafka.consumer.group-id}")
     private String groupIdValue;
-    @Value("${spring.kafka.template.resendTopic}}")
+    @Value("${spring.kafka.template.resend-topic}}")
     private String processedOrderTopicValue;
 
     @Bean
