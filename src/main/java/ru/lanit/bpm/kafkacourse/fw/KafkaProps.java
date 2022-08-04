@@ -6,11 +6,13 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class KafkaProps {
-    @Value("${spring.kafka.producer.order.topic}")
-    private String orderTopicValue;
 
-    @Value("${spring.kafka.producer.user.topic}")
-    private String userTopicValue;
+    @Value("${spring.kafka.template.defaultTopic}")
+    private String orderTopicValue;
+    @Value("${spring.kafka.consumer.groupId}")
+    private String groupIdValue;
+    @Value("${spring.kafka.template.resendTopic}}")
+    private String processedOrderTopicValue;
 
     @Bean
     public String orderTopic() {
@@ -18,7 +20,12 @@ public class KafkaProps {
     }
 
     @Bean
-    public String userTopic() {
-        return userTopicValue;
+    public String resendTopic() {
+        return processedOrderTopicValue;
+    }
+
+    @Bean
+    public String groupId() {
+        return groupIdValue;
     }
 }

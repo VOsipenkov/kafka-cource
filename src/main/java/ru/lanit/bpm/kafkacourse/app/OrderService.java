@@ -3,7 +3,9 @@ package ru.lanit.bpm.kafkacourse.app;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.EnableKafka;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Service;
 import ru.lanit.bpm.kafkacourse.domain.Order;
 
@@ -19,5 +21,10 @@ public class OrderService {
     public void send(Order order) {
         log.info("Отправка сообщения в кафку {}", order);
         orderKafkaTemplate.send(orderTopic, "", order);
+    }
+
+    @KafkaListener(topics = "#{orderTopic}", groupId = "#{groupId}")
+    @SendTo(value = "#{resendTopic}")
+    public void processAndResend() {
     }
 }
