@@ -9,6 +9,10 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Service;
 import ru.lanit.bpm.kafkacourse.domain.Order;
 
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+
 @Slf4j
 @Service
 @EnableKafka
@@ -18,9 +22,11 @@ public class OrderService {
     private final KafkaTemplate<String, Object> orderKafkaTemplate;
     private final String orderTopic;
 
-    public void send(Order order) {
+    public void send(Order order) throws ExecutionException, InterruptedException, TimeoutException {
         log.info("Отправка сообщения в кафку {}", order);
-        orderKafkaTemplate.send(orderTopic, "", order);
+        var future = orderKafkaTemplate.send(orderTopic, "", order);
+        future.get(10, TimeUnit.SECONDS);
+        log.info("Message send successful");
     }
 
     @KafkaListener(topics = "#{orderTopic}", groupId = "#{groupId}")
